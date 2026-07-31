@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy 2 Years, My Love 💌</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffe4ec 0%, #ffd1dc 40%, #ffb6c1 100%);
+      font-family: "Poppins", sans-serif;
+      color: #4a2c2a;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating hearts */
+    .background-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 1.8rem;
+      color: #ff6b8b;
+      opacity: 0.35;
+      animation: float 16s infinite linear;
+      user-select: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(110vh) scale(0.6) rotate(0deg);
+        opacity: 0.4;
+      }
+      100% {
+        transform: translateY(-15vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      padding: 50px 40px;
+      max-width: 620px;
+      width: 100%;
+      box-shadow: 0 25px 50px rgba(255, 105, 180, 0.18);
+      border: 1px solid rgba(255, 182, 193, 0.4);
+    }
+
+    h1 {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(2.8rem, 8vw, 4.2rem);
+      color: #d6336c;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: #8a5a5a;
+      margin-bottom: 28px;
+      font-weight: 400;
+    }
+
+    .main-photo {
+      margin: 18px auto 12px;
+      text-align: center;
+    }
+
+    .main-photo img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 22px;
+      box-shadow: 0 12px 30px rgba(255, 105, 180, 0.25);
+      border: 4px solid white;
+    }
+
+    
+
+    .question {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.6rem, 5vw, 2.1rem);
+      font-weight: 600;
+      color: #c2255c;
+      margin-bottom: 36px;
+      line-height: 1.35;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .btn {
+      font-family: "Poppins", sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      padding: 14px 42px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 54px;
+      line-height: 1;
+    }
+
+    #yesBtn {
+      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      color: white;
+    }
+
+    #yesBtn:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 14px 28px rgba(255, 77, 109, 0.4);
+    }
+
+    #noBtn {
+      background: white;
+      color: #ff4d6d;
+      border: 2px solid #ffb3c1;
+      padding: 12px 36px;
+    }
+
+    #noBtn:hover {
+      background: #fff0f3;
+    }
+
+    /* Congrats Screen */
+    .congrats {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #ffe4ec, #ffd6e0, #fff0f5);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      transition: opacity 1s ease;
+      padding: 30px 20px;
+      overflow-y: auto;
+    }
+
+    .congrats.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .congrats-content {
+      max-width: 680px;
+      text-align: center;
+    }
+
+    .congrats h2 {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(2.8rem, 9vw, 4.5rem);
+      color: #d6336c;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .congrats img {
+      max-width: 280px;
+      width: 100%;
+      border-radius: 20px;
+      margin: 20px auto 30px;
+      display: block;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    .message {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.25rem, 3.8vw, 1.55rem);
+      line-height: 1.7;
+      color: #5c3a3a;
+      background: rgba(255,255,255,0.7);
+      padding: 32px 28px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(255,105,180,0.1);
+    }
+
+    .message p {
+      margin-bottom: 16px;
+    }
+
+    .message p:last-child {
+      margin-bottom: 0;
+      font-weight: 600;
+      color: #c2255c;
+    }
+
+    .small-heart {
+      display: inline-block;
+      animation: heartbeat 1.3s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-hearts" id="heartsContainer"></div>
+
+  <div class="container">
+    <div class="card">
+      <h1>Hey Beautiful 💕</h1>
+      <p class="subtitle">Two years of us… and still my favorite story</p>
+
+      <div class="main-photo">
+        <img src="photo.jpg" alt="Us together" />
+      </div>
+
+      <div class="question">
+        Happy 2 Years + Girlfriend’s Day…<br>
+        Will you keep being my girlfriend?
+      </div>
+
+      <div class="buttons">
+        <button class="btn" id="yesBtn">Yes 🥰</button>
+        <button class="btn" id="noBtn">No 😒</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Congrats Screen -->
+  <div class="congrats" id="congratsScreen">
+    <div class="congrats-content">
+      <h2>Happy Anniversary<br>My Love 💖</h2>
+
+      <img id="yes-8" src="https://media.baamboozle.com/uploads/images/466401/1634027357_1503633_gif-url.gif" alt="" />
+      <img id="yes-9" style="display:none;" src="https://media.tenor.com/_6GBzpzSIzgAAAAM/tom-and-jerry-cat-kiss.gif" alt="" />
+      <img id="yes-5" style="display:none;" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTQzNmNzY2hidTh1bG1tN3ZuNnU4emFoOWRscHFteDdyb2I2cTF0MyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/w4au8ytRIs9KU/giphy.gif" alt="" />
+      <img id="yes-6" style="display:none;" src="https://media.tenor.com/rHIQLqTky0wAAAAM/tom-and-jerry-kiss.gif" alt="" />
+      <img id="yes-7" style="display:none;" src="https://media.tenor.com/VBoVrlCTNBUAAAAM/love-love-proposal.gif" alt="" />
+
+      <div class="message">
+        <p>Two years ago, I didn’t just find a girlfriend.<br>
+        I found the person who makes ordinary days feel special and hard days feel lighter.</p>
+
+        <p>Today, on Girlfriend’s Day and our anniversary, I want you to know this:<br>
+        I’m still choosing you.<br>
+        Not out of habit, not out of comfort… but because every version of my future still has you in it.</p>
+
+        <p>Happy two years, my love.<br>
+        I’m not done falling for you. <span class="small-heart">❤️</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <script>
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = ["❤️", "💖", "💕", "💗", "💓", "💞"][Math.floor(Math.random() * 6)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = Math.random() * 10 + 12 + "s";
+      heart.style.fontSize = Math.random() * 1.4 + 1.2 + "rem";
+      document.getElementById("heartsContainer").appendChild(heart);
+      setTimeout(() => heart.remove(), 18000);
+    }
+    setInterval(createHeart, 700);
+
+    // Moving No button
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    let isMoving = false;
+
+    // Remember the original vertical position of the buttons so No never goes lower
+    let originalTop = null;
+
+    function getOriginalTop() {
+      if (originalTop === null) {
+        const rect = yesBtn.getBoundingClientRect();
+        originalTop = rect.top;
+      }
+      return originalTop;
+    }
+
+    document.addEventListener("mousemove", (e) => {
+      if (isMoving) return;
+      const rect = noBtn.getBoundingClientRect();
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      const btnCenterX = rect.left + rect.width / 2;
+      const btnCenterY = rect.top + rect.height / 2;
+      const dx = mouseX - btnCenterX;
+      const dy = mouseY - btnCenterY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const threshold = 160;
+
+      if (distance < threshold) {
+        isMoving = true;
+        const escapeForce = (threshold - distance) * 3.8 + 120;
+        const angle = Math.atan2(dy, dx);
+        let newX = btnCenterX - Math.cos(angle) * escapeForce;
+        let newY = btnCenterY - Math.sin(angle) * escapeForce;
+
+        // Allow free movement all over the screen, but NEVER go below the Yes button
+        const baseTop = getOriginalTop();
+        newY = Math.min(newY, baseTop);          // never go lower than original Yes button level
+        newY = Math.max(40, newY);               // can go up freely
+
+        newX = Math.max(40, Math.min(window.innerWidth - 180, newX));
+
+        noBtn.style.position = "fixed";
+        noBtn.style.left = newX + "px";
+        noBtn.style.top = newY + "px";
+        noBtn.style.transition = "all 0.08s cubic-bezier(0.23, 1, 0.32, 1)";
+        setTimeout(() => { isMoving = false; }, 90);
+      }
+    });
+
+    noBtn.addEventListener("click", () => {
+      const rect = noBtn.getBoundingClientRect();
+      noBtn.style.opacity = "0";
+      noBtn.style.pointerEvents = "none";
+      setTimeout(() => {
+        const baseTop = getOriginalTop();
+        const randLeft = Math.random() * (window.innerWidth - rect.width - 40) + 20;
+        // Can appear anywhere above the Yes button level, but never below it
+        const randTop = Math.random() * (baseTop - 60) + 40;
+
+        noBtn.style.left = randLeft + "px";
+        noBtn.style.top = randTop + "px";
+        const phrases = [
+          "Really? 😏", "Try again 😂", "Are you sure? 🥺",
+          "Think twice… 🥹", "Come on, pookie 💕", "Please? ❤️",
+          "I know you want to say yes 😉", "No way 😜"
+        ];
+        noBtn.innerHTML = phrases[Math.floor(Math.random() * phrases.length)];
+        noBtn.style.opacity = "1";
+        noBtn.style.pointerEvents = "auto";
+      }, 280);
+    });
+
+    const yesGifs = [
+      document.getElementById("yes-5"),
+      document.getElementById("yes-6"),
+      document.getElementById("yes-7"),
+      document.getElementById("yes-8"),
+      document.getElementById("yes-9"),
+    ];
+
+    yesBtn.addEventListener("click", () => {
+      document.getElementById("congratsScreen").classList.add("show");
+
+      setInterval(() => {
+        const randGif = yesGifs[Math.floor(Math.random() * yesGifs.length)];
+        yesGifs.forEach(g => g.style.display = "none");
+        randGif.style.display = "block";
+      }, 3200);
+
+      const duration = 6500;
+      const end = Date.now() + duration;
+      (function frame() {
+        confetti({
+          particleCount: 9,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0, y: Math.random() * 0.6 },
+          colors: ["#ff0a54", "#ff477e", "#ff7096", "#ff85a1", "#fbb1bd"]
+        });
+        confetti({
+          particleCount: 9,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1, y: Math.random() * 0.6 },
+          colors: ["#ff9aa2", "#ffd1dc", "#ffafcc", "#ffc8dd"]
+        });
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
+    });
+  </script>
+</body>
+</html>
